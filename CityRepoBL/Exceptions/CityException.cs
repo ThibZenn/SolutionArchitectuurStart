@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CityRepoBL.Exceptions
+﻿
+namespace CityRepoBL.Managers
 {
-    public class CityException : Exception
+    [Serializable]
+    internal class CityException : Exception
     {
+        public CityException()
+        {
+        }
+
         public CityException(string? message) : base(message)
         {
         }
