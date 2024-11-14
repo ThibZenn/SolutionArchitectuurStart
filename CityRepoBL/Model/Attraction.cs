@@ -27,7 +27,7 @@ namespace CityRepoBL.Model
             Organizer = organizer;
         }
 
-        public int? Id { get; set; }
+        public int? Id { get; set; } //id is nullable omdat de id aangemaakt wordt in de DB (dus de id wordt pas later aangemaakt)
         private string name = "";
         public string Name
         {
@@ -57,16 +57,16 @@ namespace CityRepoBL.Model
             return $"{Name} is of type {Type}, organized by {Organizer} and located at {Location}"
                 + $"\nDetails : {Description}";
         }
-        public override bool Equals(object? other)
+        public override bool Equals(object? other) // deze methode overschrijven we omdat we de .contains methode gebruiken in city. Dit moet altijd gebeuren als we .contains gebruiken met een object!
         {
-            if (other is Attraction)
+            if (other is Attraction) // kijken of het type van het object juist is
             {
-                Attraction compAttraction = (Attraction)other;
-                if (Id.HasValue && compAttraction.Id.HasValue)
+                Attraction compAttraction = (Attraction)other; 
+                if (Id.HasValue && compAttraction.Id.HasValue) // id's controlleren, zijn ze gelijk return true
                 {
                     if (Id == compAttraction.Id) return true; else return false;
                 }
-                else
+                else // Als ze alletwee nog geen id hebben, dan gaan we proberen vergelijken op naam en organizer om toch nog te kunnen weten of ze gelijk zijn. Deze regel moeten we toevoegen omdat we aangegeven hebben bij de ID dat die nullable mag zijn.
                 {
                     return Name == compAttraction.Name &&
                    Organizer == compAttraction.Organizer;

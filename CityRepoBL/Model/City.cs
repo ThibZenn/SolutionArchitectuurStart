@@ -47,11 +47,11 @@ namespace CityRepoBL.Model
         }
         public string Description { get; set; }
         public string Country { get; set; }
-        private List<Attraction> attractions { get; set; } = new();
+        private List<Attraction> attractions = new(); // private zodat we de regels van addAttraction en removeAttraction niet kunnen omzeilen. Anders kunnen we gewoon attractions.add doen en de regels omzeilen.
         public IReadOnlyList<Attraction> Attractions => attractions;
         public bool HasAttraction(Attraction attraction)
         {
-            return attractions.Contains(attraction);
+            return attractions.Contains(attraction); // Als je contains gebruikt moet je ALTIJD de equals methode overschrijven als we een object willen vergelijken!!
         }
         public void AddAttraction(Attraction attraction)
         {
